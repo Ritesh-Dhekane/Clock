@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Full Screen Clock</title>
+
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- FontAwesome -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#1a1a1a" />
+
+    <!-- Icons -->
+    <link rel="icon" href="icons/icon-192.png" />
+    <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  </head>
+  <body>
+    <!-- Sections -->
+    <main>
+      <!-- Clock -->
+      <section id="clock" class="feature-section active">
+        <div class="clock-container">
+          <div class="time">
+            <span class="time-segment" id="hours">00</span>
+            <span class="time-separator">:</span>
+            <span class="time-segment" id="minutes">00</span>
+            <span class="time-separator">:</span>
+            <span class="time-segment" id="seconds">00</span>
+          </div>
+          <div class="date" id="date">Monday, January 1</div>
+        </div>
+      </section>
+
+      <!-- Stopwatch -->
+      <section id="stopwatch" class="feature-section">
+        <h2 class="feature-title">Stopwatch</h2>
+        <div class="time">
+          <span class="time-segment" id="stopwatch-hours">00</span>
+          <span class="time-separator">:</span>
+          <span class="time-segment" id="stopwatch-minutes">00</span>
+          <span class="time-separator">:</span>
+          <span class="time-segment" id="stopwatch-seconds">00</span>
+        </div>
+        <div class="stopwatch-controls">
+          <button class="stopwatch-btn" id="stopwatch-start">
+            <i class="fas fa-play"></i> Start
+          </button>
+          <button class="stopwatch-btn" id="stopwatch-pause">
+            <i class="fas fa-pause"></i> Pause
+          </button>
+          <button class="stopwatch-btn" id="stopwatch-reset">
+            <i class="fas fa-undo"></i> Reset
+          </button>
+        </div>
+      </section>
+
+      <!-- Timer -->
+      <section id="timer" class="feature-section">
+        <h2 class="feature-title">Timer</h2>
+        <div class="time">
+          <span class="time-segment" id="timer-minutes">10</span>
+          <span class="time-separator">:</span>
+          <span class="time-segment" id="timer-seconds">00</span>
+        </div>
+        <div class="timer-options">
+          <button class="timer-btn" data-minutes="10">10 Min</button>
+          <button class="timer-btn" data-minutes="15">15 Min</button>
+          <button class="timer-btn" data-minutes="30">30 Min</button>
+        </div>
+        <div class="custom-timer">
+          <input
+            type="number"
+            id="custom-minutes"
+            placeholder="Minutes"
+            min="1"
+            max="120"
+          />
+          <button class="timer-btn" id="custom-start">
+            <i class="fas fa-play"></i> Start Custom
+          </button>
+        </div>
+        <div class="stopwatch-controls">
+          <button class="stopwatch-btn" id="timer-start">
+            <i class="fas fa-play"></i> Start
+          </button>
+          <button class="stopwatch-btn" id="timer-pause">
+            <i class="fas fa-pause"></i> Pause
+          </button>
+          <button class="stopwatch-btn" id="timer-reset">
+            <i class="fas fa-undo"></i> Reset
+          </button>
+        </div>
+      </section>
+
+      <!-- Calendar -->
+      <section id="calendar" class="feature-section">
+        <h2 class="feature-title">Calendar</h2>
+        <div id="apple-calendar"></div>
+      </section>
+    </main>
+
+    <!-- Controls -->
+    <div class="controls">
+      <button class="control-btn active" id="clock-btn" title="Clock">
+        <img src="icons/clock.svg" alt="Clock" class="icon" />
+      </button>
+
+      <button class="control-btn" id="stopwatch-btn" title="Stopwatch">
+        <img src="icons/stopwatch.svg" alt="Stopwatch" class="icon" />
+      </button>
+
+      <button class="control-btn" id="timer-btn" title="Timer">
+        <img src="icons/hourglass.svg" alt="Timer" class="icon" />
+      </button>
+
+      <button class="control-btn" id="calendar-btn" title="Calendar">
+        <img src="icons/calendar.svg" alt="Calendar" class="icon" />
+      </button>
+
+      <button class="control-btn" id="theme-btn" title="Themes">
+        <img src="icons/palette.svg" alt="Themes" class="icon" />
+      </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+    <script>
+      if ("serviceWorker" in navigator) {
+        navigator.serviceWorker
+          .register("sw.js")
+          .then(() => console.log("Service Worker registered"))
+          .catch((err) => console.log("SW registration failed:", err));
+      }
+    </script>
+  </body>
+</html>

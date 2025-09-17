@@ -1,0 +1,372 @@
+/* Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Floating Bubble Background */
+body::before,
+body::after {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  animation: float 15s infinite ease-in-out;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::before {
+  top: 0;
+  left: 0;
+  transform: translate(-50%, -50%);
+}
+
+body::after {
+  bottom: 0;
+  right: 0;
+  transform: translate(50%, 50%);
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-40px) scale(1.1); }
+}
+
+/* Main Sections */
+main {
+  width: 100%;
+  max-width: 1200px;
+  padding: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+section {
+  margin: 40px auto;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+}
+
+section:hover {
+  transform: scale(1.02);
+}
+
+/* Clock Display */
+.clock-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.time {
+  font-family: "Orbitron", monospace;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  letter-spacing: 0.05em;
+}
+
+.time-segment {
+  min-width: 70px;
+}
+
+.time-separator {
+  margin: 0 10px;
+}
+
+.date {
+  font-size: clamp(1rem, 2vw, 2rem);
+  margin-top: 10px;
+  opacity: 0.9;
+}
+
+/* Controls */
+.controls {
+  position: relative; /* changed from fixed */
+  margin-bottom: 25px;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  z-index: 2;
+}
+
+.control-btn {
+  background: #444;
+  border: none;
+  border-radius: 50%;
+  width: 55px;
+  height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  color: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.control-btn img.icon {
+  width: 24px;
+  height: 24px;
+  pointer-events: none;
+  display: block;
+}
+
+body.theme-light .control-btn img.icon { filter: invert(0); }
+body:not(.theme-light) .control-btn img.icon { filter: invert(1); }
+
+.control-btn:hover,
+.control-btn.active {
+  background: #ff9800;
+  transform: scale(1.15);
+}
+
+/* Feature Sections */
+.feature-section {
+  display: none;
+  width: 90%;
+  max-width: 750px;
+  padding: 25px 15px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.feature-section.active {
+  display: block;
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Stopwatch / Timer Controls */
+.stopwatch-controls,
+.timer-options,
+.custom-timer {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  flex-wrap: wrap;
+}
+
+.stopwatch-btn,
+.timer-btn {
+  background: #444;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 18px;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.stopwatch-btn:hover,
+.timer-btn:hover {
+  background: #ff9800;
+  transform: scale(1.05);
+}
+
+.custom-timer input {
+  padding: 8px;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  width: 80px;
+  text-align: center;
+}
+
+/* Calendar */
+/* Calendar Container */
+#apple-calendar {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.4);
+  padding: 15px;
+  overflow-x: auto;
+  box-sizing: border-box;
+}
+
+/* Calendar Header with Arrows */
+#apple-calendar .calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+#apple-calendar .calendar-header h3 {
+  margin: 0;
+  font-size: 1.2rem;
+  flex: 1;
+  text-align: center;
+}
+
+#apple-calendar .calendar-header button {
+  background: #444;
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  color: #fff;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#apple-calendar .calendar-header button:hover {
+  background: #ff9800;
+  transform: scale(1.05);
+}
+
+/* Calendar Table */
+#apple-calendar table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+#apple-calendar th {
+  padding: 8px;
+  font-weight: 600;
+  color: #ff9800;
+}
+
+#apple-calendar td {
+  padding: 12px;
+  transition: background 0.3s ease;
+  border-radius: 6px;
+}
+
+#apple-calendar td:hover {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+#apple-calendar td.today {
+  background: rgba(255, 152, 0, 0.2);
+  border: 2px solid #ff4444;
+  border-radius: 8px;
+  font-weight: bold;
+  color: #fff;
+}
+
+
+
+/* Themes */
+body.theme-light {
+  background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+  color: #222;
+}
+
+body.theme-light section {
+  background: rgba(255, 255, 255, 0.8);
+}
+
+body.theme-light .control-btn {
+  background: #ddd;
+  color: #000;
+}
+
+body.theme-light .control-btn:hover,
+body.theme-light .control-btn.active {
+  background: #ff9800;
+  color: #fff;
+}
+
+/* Responsiveness */
+@media (max-width: 768px) {
+  .controls { gap: 10px; }
+  .control-btn { width: 50px; height: 50px; font-size: 1.3rem; }
+  section { margin: 20px auto; padding: 20px; }
+  .time { font-size: clamp(2.5rem, 12vw, 5rem); }
+}
+
+@media (max-width: 480px) {
+  .time { font-size: clamp(2rem, 12vw, 3.5rem); }
+  .time-segment { min-width: 40px; }
+  .date { font-size: 1rem; }
+  .stopwatch-btn,
+  .timer-btn { padding: 8px 12px; font-size: 0.95rem; }
+  .controls { gap: 8px; }
+  .control-btn { width: 45px; height: 45px; font-size: 1.1rem; }
+}
+
+
+/* Smaller bubbles for tablets */
+@media (max-width: 768px) {
+  body::before,
+  body::after {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* Even smaller bubbles for phones */
+@media (max-width: 480px) {
+  body::before,
+  body::after {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+/* Responsive Calendar */
+@media (max-width: 768px) {
+  #apple-calendar .calendar-header h3 {
+    font-size: 1rem;
+  }
+  #apple-calendar .calendar-header button {
+    padding: 5px 10px;
+    font-size: 0.9rem;
+  }
+  #apple-calendar td,
+  #apple-calendar th {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  #apple-calendar .calendar-header h3 {
+    font-size: 0.9rem;
+  }
+  #apple-calendar .calendar-header button { 
+    padding: 4px 8px;
+    font-size: 0.8rem;
+  }
+  #apple-calendar td,
+  #apple-calendar th {
+    padding: 8px;
+    font-size: 0.8rem;
+  }
+}
